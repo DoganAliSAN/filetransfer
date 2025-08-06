@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>File & Folder Downloader</title>
+    <title>Download Zipped Folders</title>
 </head>
 <body>
-    <h1>Available Files and Folders</h1>
+    <h1>📦 Zipped Folders</h1>
+
+    <form action="{{ url_for('zip_all_folders') }}" method="post">
+        <button type="submit">🔁 Generate ZIPs for All Folders</button>
+    </form>
+
+    <h2>Available ZIP Downloads:</h2>
     <ul>
-        {% for entry in entries %}
-            {% if entry.is_file %}
-                <li>📄 <a href="{{ url_for('download_file', filename=entry.name) }}">{{ entry.name }}</a></li>
-            {% elif entry.is_folder %}
-                <li>📁 <a href="{{ url_for('download_folder', foldername=entry.name) }}">{{ entry.name }}</a> (as .zip)</li>
-            {% endif %}
+        {% for zip in zip_files %}
+            <li><a href="{{ url_for('download_zip', zipname=zip) }}">{{ zip }}</a></li>
+        {% else %}
+            <li>No ZIP files yet.</li>
         {% endfor %}
     </ul>
-
-    <form action="{{ url_for('download_all') }}" method="get">
-        <button type="submit">📦 Download All (Files + Folders)</button>
-    </form>
 </body>
 </html>
