@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Downloader</title>
+</head>
+<body>
+    <h1>Available Images</h1>
+    <ul>
+        {% for img in images %}
+        <li><a href="{{ url_for('download_file', filename=img) }}">{{ img }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('download_all') }}" method="get">
+        <button type="submit">Download All Images as ZIP</button>
+    </form>
+</body>
+</html>
